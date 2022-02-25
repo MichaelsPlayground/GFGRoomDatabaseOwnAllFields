@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 //on recycler view item swiped then we are deleting the item of our recycler view.
                 viewmodal.delete(adapter.getCourseAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Course deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Stock movement deleted", Toast.LENGTH_SHORT).show();
             }
         }).
                 //below line is use to attact this to recycler view.
