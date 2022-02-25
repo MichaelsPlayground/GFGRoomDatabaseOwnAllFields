@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewStockMovementActivity">
+
+
+    <!--edit text for our stock name-->
+    <EditText
+        android:id="@+id/idEdtStockName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Stock Name"
+        android:minHeight="48dp" />
+
+    <!--edit text for our stock isin-->
+    <EditText
+        android:id="@+id/idEdtStockIsin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter StockIsin"
+        android:minHeight="48dp" />
+
+    <!--edit text for course description-->
+    <EditText
+        android:id="@+id/idEdtDateUnix"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Date Unix"
+        android:minHeight="48dp" />
+
+    <!--button for saving data to room database-->
+    <Button
+        android:id="@+id/idBtnSaveStockMovement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:text="Save your stock movement"
+        android:textAllCaps="false" />
+
+</LinearLayout>
