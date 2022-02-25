@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     //creating a variables for our recycler view.
     private RecyclerView stockMovementsRV;
-    // private static final int ADD_STOCK_MOVEMENT_REQUEST = 1; // deprecated
-    // private static final int EDIT_STOCK_MOVEMENT_REQUEST = 2; // deprecated
     private ViewModal viewmodal;
 
     @Override
@@ -48,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //starting a new activity for adding a new course and passing a constant value in it.
                 Intent intent = new Intent(MainActivity.this, NewStockMovementActivity.class);
-                // todo deprecated
-                // startActivityForResult(intent, ADD_STOCK_MOVEMENT_REQUEST); // deprecated
                 addStockMovementActivityResultLauncher.launch(intent);
             }
         });
@@ -62,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
         //setting adapter class for recycler view.
         stockMovementsRV.setAdapter(adapter);
         //passing a data from view modal.
-        // todo deprecated
-        viewmodal = ViewModelProviders.of(this).get(ViewModal.class);
+        viewmodal = new ViewModelProvider(this).get(ViewModal.class);
         //below line is use to get all the courses from view modal.
         viewmodal.getAllStockMovements().observe(this, new Observer<List<StockMovementsModal>>() {
             @Override
@@ -101,8 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN, model.getStockIsin());
                 intent.putExtra(NewStockMovementActivity.EXTRA_DATE_UNIX, model.getDateUnix());
                 //below line is to start a new activity and adding a edit stock movement constant.
-                // todo deprecated
-                // startActivityForResult(intent, EDIT_STOCK_MOVEMENT_REQUEST);
                 editStockMovementActivityResultLauncher.launch(intent);
             }
         });
@@ -151,39 +145,8 @@ public class MainActivity extends AppCompatActivity {
                         model.setId(id);
                         viewmodal.update(model);
                         Toast.makeText(getBaseContext(), "Stock movement updated", Toast.LENGTH_SHORT).show();
-                 }
+                    }
                 }
             });
 
-    /* deprecated
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == ADD_STOCK_MOVEMENT_REQUEST && resultCode == RESULT_OK) {
-            // todo append
-            String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
-            String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
-            String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-// String date, String dateUnix, String stockName, String stockIsin,  String direction,  String amountEuro,  String numberShares, String bank,  String note
-            StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
-            viewmodal.insert(model);
-            Toast.makeText(this, "Stock movement saved", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == EDIT_STOCK_MOVEMENT_REQUEST && resultCode == RESULT_OK) {
-            int id = data.getIntExtra(NewStockMovementActivity.EXTRA_ID, -1);
-            if (id == -1) {
-                Toast.makeText(this, "Stock movement can't be updated", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            // todo append
-            String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
-            String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
-            String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-            StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
-            model.setId(id);
-            viewmodal.update(model);
-            Toast.makeText(this, "Stock movement updated", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Stock movement not saved", Toast.LENGTH_SHORT).show();
-        }
-    }*/
 }
