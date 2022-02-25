@@ -1,9 +1,10 @@
 package de.androidcrypto.gfgroomdatabaseown;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,25 +14,19 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityDeprecated extends AppCompatActivity {
 
     // source: https://github.com/ChaitanyaMunje/GFG-Room-Database
     // tutorial: https://www.geeksforgeeks.org/how-to-perform-crud-operations-in-room-database-in-android/
 
     //creating a variables for our recycler view.
     private RecyclerView stockMovementsRV;
-    // private static final int ADD_STOCK_MOVEMENT_REQUEST = 1; // deprecated
-    // private static final int EDIT_STOCK_MOVEMENT_REQUEST = 2; // deprecated
+    private static final int ADD_STOCK_MOVEMENT_REQUEST = 1;
+    private static final int EDIT_STOCK_MOVEMENT_REQUEST = 2;
     private ViewModal viewmodal;
 
     @Override
@@ -47,10 +42,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //starting a new activity for adding a new course and passing a constant value in it.
-                Intent intent = new Intent(MainActivity.this, NewStockMovementActivity.class);
+                Intent intent = new Intent(MainActivityDeprecated.this, NewStockMovementActivity.class);
                 // todo deprecated
-                // startActivityForResult(intent, ADD_STOCK_MOVEMENT_REQUEST); // deprecated
-                addStockMovementActivityResultLauncher.launch(intent);
+                startActivityForResult(intent, ADD_STOCK_MOVEMENT_REQUEST);
             }
         });
 
@@ -83,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 //on recycler view item swiped then we are deleting the item of our recycler view.
                 viewmodal.delete(adapter.getCourseAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Course deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityDeprecated.this, "Course deleted", Toast.LENGTH_SHORT).show();
             }
         }).
                 //below line is use to attact this to recycler view.
@@ -94,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(StockMovementsModal model) {
                 //after clicking on item of recycler view
                 //we are opening a new activity and passing a data to our activity.
-                Intent intent = new Intent(MainActivity.this, NewStockMovementActivity.class);
+                Intent intent = new Intent(MainActivityDeprecated.this, NewStockMovementActivity.class);
                 // todo append
                 intent.putExtra(NewStockMovementActivity.EXTRA_ID, model.getId());
                 intent.putExtra(NewStockMovementActivity.EXTRA_STOCK_NAME, model.getStockName());
@@ -102,60 +96,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(NewStockMovementActivity.EXTRA_DATE_UNIX, model.getDateUnix());
                 //below line is to start a new activity and adding a edit stock movement constant.
                 // todo deprecated
-                // startActivityForResult(intent, EDIT_STOCK_MOVEMENT_REQUEST);
-                editStockMovementActivityResultLauncher.launch(intent);
+                startActivityForResult(intent, EDIT_STOCK_MOVEMENT_REQUEST);
             }
         });
     }
 
-    // ersatz für deprecated startActivityForResult
-    ActivityResultLauncher<Intent> addStockMovementActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        // todo append
-                        String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
-                        String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
-                        String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-// String date, String dateUnix, String stockName, String stockIsin,  String direction,  String amountEuro,  String numberShares, String bank,  String note
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
-                        viewmodal.insert(model);
-                        Toast.makeText(getBaseContext(), "Stock movement saved", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-    ActivityResultLauncher<Intent> editStockMovementActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-
-                        int id = data.getIntExtra(NewStockMovementActivity.EXTRA_ID, -1);
-                        if (id == -1) {
-                            Toast.makeText(getBaseContext(), "Stock movement can't be updated", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        // todo append
-                        String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
-                        String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
-                        String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
-                        model.setId(id);
-                        viewmodal.update(model);
-                        Toast.makeText(getBaseContext(), "Stock movement updated", Toast.LENGTH_SHORT).show();
-                 }
-                }
-            });
-
-    /* deprecated
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -185,5 +130,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Stock movement not saved", Toast.LENGTH_SHORT).show();
         }
-    }*/
+
+    }
 }
