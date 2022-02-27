@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 //below line is for setting table name.
 @Entity(tableName = "stock_movements_table")
-public class StockMovementsModal {
+public class StockMovementsModal_2022_02_27 {
 
     //below line is to auto increment id for each course.
     @PrimaryKey(autoGenerate = true)
@@ -27,67 +27,17 @@ public class StockMovementsModal {
     private String numberShares;
     //below line is use for the bank of the account.
     private String bank;
-    // summe der anteile im bestand
-    private String totalNumberShares;
-    // summe der kaufkosten
-    private String totalPurchaseCosts;
     //below line is use for a note.
     private String note;
     // gültigkeit der daten für monat bzw jahr
-    private String dataYear, dataMonth;
-    // ist der datensatz aktiv
-    private String active; // true or false
-
-    public String getTotalNumberShares() {
-        return totalNumberShares;
-    }
-
-    public void setTotalNumberShares(String totalNumberShares) {
-        this.totalNumberShares = totalNumberShares;
-    }
-
-    public String getTotalPurchaseCosts() {
-        return totalPurchaseCosts;
-    }
-
-    public void setTotalPurchaseCosts(String totalPurchaseCosts) {
-        this.totalPurchaseCosts = totalPurchaseCosts;
-    }
-
-    public String getDataYear() {
-        return dataYear;
-    }
-
-    public void setDataYear(String dataYear) {
-        this.dataYear = dataYear;
-    }
-
-    public String getDataMonth() {
-        return dataMonth;
-    }
-
-    public void setDataMonth(String dataMonth) {
-        this.dataMonth = dataMonth;
-    }
-
-    public String getActive() {
-        return active;
-    }
-
-    public void setActive(String active) {
-        this.active = active;
-    }
 
     //below line we are creating constructor class.
     //inside constructor class we are not passing our id because it is incrementing automatically
-    public StockMovementsModal(String date, String dateUnix,
+    public StockMovementsModal_2022_02_27(String date, String dateUnix,
                                           String stockName, String stockIsin,
                                           String direction, String amountEuro,
                                           String numberShares, String bank,
-                                          String note, String totalNumberShares,
-                                          String totalPurchaseCosts,
-                                          String dataYear, String dataMonth,
-                                          String active) {
+                                          String note) {
         this.date = date;
         this.dateUnix = dateUnix;
         this.stockName = stockName;
@@ -97,11 +47,6 @@ public class StockMovementsModal {
         this.numberShares = numberShares;
         this.bank = bank;
         this.note = note;
-        this.totalNumberShares = totalNumberShares;
-        this.totalPurchaseCosts = totalPurchaseCosts;
-        this.dataYear = dataYear;
-        this.dataMonth = dataMonth;
-        this.active = active;
     }
 
     //on below line we are creating getter and setter methods.

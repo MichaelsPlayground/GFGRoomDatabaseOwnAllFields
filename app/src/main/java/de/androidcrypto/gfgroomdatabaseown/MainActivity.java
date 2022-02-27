@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
                         String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
 // String date, String dateUnix, String stockName, String stockIsin,  String direction,  String amountEuro,  String numberShares, String bank,  String note
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
+                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "","", "");
                         viewmodal.insert(model);
                         Toast.makeText(getBaseContext(), "Stock movement saved", Toast.LENGTH_SHORT).show();
                     }
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
                         String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
                         String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "");
+                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "", "", "");
                         model.setId(id);
                         viewmodal.update(model);
                         Toast.makeText(getBaseContext(), "Stock movement updated", Toast.LENGTH_SHORT).show();
