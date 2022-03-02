@@ -13,7 +13,7 @@
         android:id="@+id/idEdtStockName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:hint="Enter Stock Name"
         android:minHeight="48dp" />
 
@@ -22,7 +22,7 @@
         android:id="@+id/idEdtStockIsin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:hint="Enter StockIsin"
         android:minHeight="48dp" />
 
@@ -31,8 +31,36 @@
         android:id="@+id/idEdtDateUnix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:inputType="none"
+        android:focusable="false"
+        android:layout_margin="5dp"
         android:hint="Date Unix"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/idEdtDirection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="+/- Direction"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/idEdtNumberShares"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="number of shares"
+        android:inputType="numberDecimal"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/idEdtAmountEuro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="amount in Euro"
+        android:inputType="numberDecimal"
         android:minHeight="48dp" />
 
     <!--button for saving data to room database-->
