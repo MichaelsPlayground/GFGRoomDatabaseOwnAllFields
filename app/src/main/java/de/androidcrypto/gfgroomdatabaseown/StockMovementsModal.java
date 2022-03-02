@@ -19,7 +19,7 @@ public class StockMovementsModal {
     private String stockName;
     //below line is use for stock isin.
     private String stockIsin;
-    //below line is use for direction (buy or sell).
+    //below line is use for direction (+ or -).
     private String direction;
     //below line is use for amountEuro.
     private String amountEuro;
@@ -27,6 +27,8 @@ public class StockMovementsModal {
     private String numberShares;
     //below line is use for the bank of the account.
     private String bank;
+    // wertpapierdepot, e.g. Maxblue 01
+    private String securitiesAccount;
     // summe der anteile im bestand
     private String totalNumberShares;
     // summe der kaufkosten
@@ -37,6 +39,44 @@ public class StockMovementsModal {
     private String dataYear, dataMonth;
     // ist der datensatz aktiv
     private String active; // true or false
+
+    //below line we are creating constructor class.
+    //inside constructor class we are not passing our id because it is incrementing automatically
+    public StockMovementsModal(String date, String dateUnix,
+                                          String stockName, String stockIsin,
+                                          String direction, String amountEuro,
+                                          String numberShares, String bank,
+                                          String securitiesAccount,
+                                          String note, String totalNumberShares,
+                                          String totalPurchaseCosts,
+                                          String dataYear, String dataMonth,
+                                          String active) {
+        this.date = date;
+        this.dateUnix = dateUnix;
+        this.stockName = stockName;
+        this.stockIsin = stockIsin;
+        this.direction = direction;
+        this.amountEuro = amountEuro;
+        this.numberShares = numberShares;
+        this.bank = bank;
+        this.securitiesAccount = securitiesAccount;
+        this.note = note;
+        this.totalNumberShares = totalNumberShares;
+        this.totalPurchaseCosts = totalPurchaseCosts;
+        this.dataYear = dataYear;
+        this.dataMonth = dataMonth;
+        this.active = active;
+    }
+
+    //on below line we are creating getter and setter methods.
+
+    public String getSecuritiesAccount() {
+        return securitiesAccount;
+    }
+
+    public void setSecuritiesAccount(String securitiesAccount) {
+        this.securitiesAccount = securitiesAccount;
+    }
 
     public String getTotalNumberShares() {
         return totalNumberShares;
@@ -77,35 +117,6 @@ public class StockMovementsModal {
     public void setActive(String active) {
         this.active = active;
     }
-
-    //below line we are creating constructor class.
-    //inside constructor class we are not passing our id because it is incrementing automatically
-    public StockMovementsModal(String date, String dateUnix,
-                                          String stockName, String stockIsin,
-                                          String direction, String amountEuro,
-                                          String numberShares, String bank,
-                                          String note, String totalNumberShares,
-                                          String totalPurchaseCosts,
-                                          String dataYear, String dataMonth,
-                                          String active) {
-        this.date = date;
-        this.dateUnix = dateUnix;
-        this.stockName = stockName;
-        this.stockIsin = stockIsin;
-        this.direction = direction;
-        this.amountEuro = amountEuro;
-        this.numberShares = numberShares;
-        this.bank = bank;
-        this.note = note;
-        this.totalNumberShares = totalNumberShares;
-        this.totalPurchaseCosts = totalPurchaseCosts;
-        this.dataYear = dataYear;
-        this.dataMonth = dataMonth;
-        this.active = active;
-    }
-
-    //on below line we are creating getter and setter methods.
-
 
     public String getDate() {
         return date;

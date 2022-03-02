@@ -13,10 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <!--fab to add new stock movements-->
+    <!--fab to add new courses-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idFABAdd"
-        android:contentDescription="add stock movement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -26,21 +25,5 @@
         android:layout_marginEnd="18dp"
         android:layout_marginBottom="18dp"
         android:src="@android:drawable/ic_input_add"
-        app:tint="@color/white" />
-
-    <!--fab to run another activity-->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/idFABService"
-        android:contentDescription="service routines"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="18dp"
-        android:layout_marginBottom="18dp"
-        android:src="@android:drawable/ic_dialog_info"
         app:tint="@color/white" />
 </RelativeLayout>

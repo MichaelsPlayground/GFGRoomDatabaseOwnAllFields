@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15526849037487336" />
+        <entry key="app/src/main/res/layout/activity_main_2022_03_01.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_new_course.xml" value="0.15526849037487336" />
         <entry key="app/src/main/res/layout/activity_new_stock_movement.xml" value="0.15526849037487336" />
+        <entry key="app/src/main/res/layout/activity_setup_database_isin_year.xml" value="0.1" />
         <entry key="app/src/main/res/layout/course_rv_item.xml" value="0.15526849037487336" />
         <entry key="app/src/main/res/layout/stock_movements_rv_item.xml" value="0.15526849037487336" />
       </map>

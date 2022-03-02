@@ -82,7 +82,6 @@ public class StockMovementsRVAdapter extends ListAdapter<StockMovementsModal, St
                     }
                 }
             });
-
         }
     }
 

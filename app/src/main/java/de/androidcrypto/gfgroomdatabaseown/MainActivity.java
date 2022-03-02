@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView stockMovementsRV;
     private ViewModal viewmodal;
 
+    Intent setupDatabaseIsinYearIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         //initializing our variable for our recycler view and fab.
         stockMovementsRV = findViewById(R.id.idRVStockMovements);
         FloatingActionButton fab = findViewById(R.id.idFABAdd);
+        FloatingActionButton fabService = findViewById(R.id.idFABService);
+
+        setupDatabaseIsinYearIntent = new Intent(MainActivity.this, SetupDatabaseIsinYear.class);
 
         //adding on click listner for floating action button.
         fab.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
                 //starting a new activity for adding a new course and passing a constant value in it.
                 Intent intent = new Intent(MainActivity.this, NewStockMovementActivity.class);
                 addStockMovementActivityResultLauncher.launch(intent);
+            }
+        });
+
+        //adding on click listner for floating action button.
+        fabService.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SetupDatabaseIsinYear.class);
+                setupDatabaseIsinYearActivityResultLauncher.launch(intent);
             }
         });
 
@@ -78,8 +92,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 //on recycler view item swiped then we are deleting the item of our recycler view.
+
+                // todo deletion of a stock movement is disabled at the moment
                 viewmodal.delete(adapter.getCourseAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(MainActivity.this, "Stock movement deleted", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Stock movement deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Stock movement deletion is disabled", Toast.LENGTH_SHORT).show();
             }
         }).
                 //below line is use to attact this to recycler view.
@@ -102,6 +119,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    ActivityResultLauncher<Intent> setupDatabaseIsinYearActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        // todo append
+                        String stockName = data.getStringExtra(SetupDatabaseIsinYear.EXTRA_STOCK_NAME);
+                        String stockIsin = data.getStringExtra(SetupDatabaseIsinYear.EXTRA_STOCK_ISIN);
+                        String date = data.getStringExtra(SetupDatabaseIsinYear.EXTRA_DATE);
+                        String year = data.getStringExtra(SetupDatabaseIsinYear.EXTRA_DATA_YEAR);
+                        StockMovementsModal model = new StockMovementsModal(date, date, stockName, stockIsin, "", "", "", "", "", "", "", "", year,"", "");
+                        viewmodal.insert(model);
+                        //Toast.makeText(getBaseContext(), "Stock movement saved", Toast.LENGTH_SHORT).show();
+                        System.out.println("setupDatabaseIsinYearActivityResultLauncher saved");
+                    }
+                }
+            });
+
     // ersatz für deprecated startActivityForResult
     ActivityResultLauncher<Intent> addStockMovementActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -116,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                         String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
                         String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
 // String date, String dateUnix, String stockName, String stockIsin,  String direction,  String amountEuro,  String numberShares, String bank,  String note
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "","", "");
+                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "", "","", "");
                         viewmodal.insert(model);
                         Toast.makeText(getBaseContext(), "Stock movement saved", Toast.LENGTH_SHORT).show();
                     }
@@ -141,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                         String stockName = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_NAME);
                         String stockIsin = data.getStringExtra(NewStockMovementActivity.EXTRA_STOCK_ISIN);
                         String dateUnix = data.getStringExtra(NewStockMovementActivity.EXTRA_DATE_UNIX);
-                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "", "", "");
+                        StockMovementsModal model = new StockMovementsModal("", dateUnix, stockName, stockIsin, "", "", "", "", "", "", "", "", "", "", "");
                         model.setId(id);
                         viewmodal.update(model);
                         Toast.makeText(getBaseContext(), "Stock movement updated", Toast.LENGTH_SHORT).show();

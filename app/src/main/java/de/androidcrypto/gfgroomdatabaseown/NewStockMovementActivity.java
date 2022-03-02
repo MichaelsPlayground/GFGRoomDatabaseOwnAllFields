@@ -60,7 +60,7 @@ public class NewStockMovementActivity extends AppCompatActivity {
                     Toast.makeText(NewStockMovementActivity.this, "Please enter the valid course details.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //calling a method to save our course.
+                //calling a method to save our movement.
                 saveStockMovement(stockName, stockIsin, dateUnix);
             }
         });

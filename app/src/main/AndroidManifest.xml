@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GFGRoomDatabaseOwn">
+        <activity
+            android:name=".SetupDatabaseIsinYear"
+            android:exported="false" />
         <activity android:name=".NewStockMovementActivity"></activity>
         <activity
             android:name=".MainActivity"
