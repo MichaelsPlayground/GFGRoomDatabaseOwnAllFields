@@ -49,6 +49,7 @@ public class StockMovementsRVAdapter extends ListAdapter<StockMovementsModal, St
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //below line of code is use to set data to each item of our recycler view.
         // todo get all other fields to binding
+        // todo add direction, numberShares and amountEuro
         StockMovementsModal model = getCourseAt(position);
         holder.stockMovementsStockNameTV.setText(model.getStockName());
         holder.stockMovementsStockIsinTV.setText(model.getStockIsin());
